@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h3 class="text-center my-4">Search for Weather:</h3>
+      <h3 class="text-center my-4">Weather Application</h3>
       <form
         [formGroup]="weatherSearchForm"
         (ngSubmit)="sendToAPIXU(weatherSearchForm.value)"
@@ -23,30 +23,37 @@
         </div>
       </form>
     </div>
-    <div class="col-md-6">
-      <h3 class="text-center my-4">Weather Details:</h3>
-      <p class="text-center">
-        Current weather conditions:
-        {{ this.weatherData?.current.condition.text }}.
-      </p>
-      <p class="text-center">
-        Temperature in Degrees Celsius: {{ this.weatherData?.current.temp_c }}
-      </p>
-      <p class="text-center">
-        Temperature in Degrees Farenheit: {{ this.weatherData?.current.temp_f }}
-      </p>
-      <p class="text-center">
-        Feels like in Degrees Celsius:
-        {{ this.weatherData?.current.feelslike_c }}
-      </p>
-      <p class="text-center">
-        Feels like in Degrees Farenheit:
-        {{ this.weatherData?.current.feelslike_f }}
-      </p>
-      <p class="text-center">
-        Location Searched: {{ this.weatherData?.location.name }},
-        {{ this.weatherData?.location.country }}.
-      </p>
-    </div>
+    
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="col-md-6" *ngFor="let forecast of this.weatherData.forecast.forecastday">
+    <h3 class="text-center my-4">Weather Details:</h3>
+    <p class="text-center">
+      Current weather conditions:
+     <strong> {{ forecast.date}}. </strong>
+    </p>
+    <p class="text-center">
+      Temperature in Degrees Celsius:<strong> {{ forecast?.day.avgtemp_c }} </strong>
+    </p>
+    <p class="text-center">
+      Temperature in Degrees Farenheit: <strong>{{ forecast?.day.avgtemp_f }} </strong>
+    </p>
+    <p class="text-center">
+        Condition :<br>
+         <strong> {{ forecast?.day.condition.text }} <br>
+          
+           <img src="{{ forecast?.day.condition.icon }}">
+           
+     
+         </strong>
+    </p>
+    
+    
+    <p class="text-center">
+      Location Searched:<strong> {{ this.weatherData?.location.name }},
+      {{ this.weatherData?.location.country }}.</strong>
+    </p>
   </div>
 </div>
